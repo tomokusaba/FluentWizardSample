@@ -1,0 +1,57 @@
+﻿@page "/counter"
+@inject IDialogService DialogService
+
+<PageTitle>Counter</PageTitle>
+
+
+<FluentWizard @bind-Value="@Value" @ref="@fluentWizard">
+
+    <Steps>
+        <FluentWizardStep Label="Step1">
+            何かの処理その1
+        </FluentWizardStep>
+        <FluentWizardStep Label="Step2">
+            何かの処理その2
+        </FluentWizardStep>
+        <FluentWizardStep Label="Step3">
+            何かの処理その3
+        </FluentWizardStep>
+    </Steps>
+    <ButtonTemplate>
+        @{
+            var index = context;
+            var lastStepIndex = 2;
+            <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.Right" HorizontalGap="10">
+                @if (index > 0)
+                {
+                    <FluentButton Style="width:80px" OnClick="@(() => Value -= 1)">前へ</FluentButton>
+                }
+
+                @if (index < lastStepIndex)
+                {
+                    <FluentButton Style="width:80px" OnClick="@(() => Value += 1)" Appearance="Appearance.Accent">次へ</FluentButton>
+                }
+                @if (index == lastStepIndex)
+                {
+                    <FluentButton Style="width:80px" OnClick="@(() => WizardFinish())" Appearance="Appearance.Accent">完了！</FluentButton>
+                }
+            </FluentStack>
+        }
+    </ButtonTemplate>
+</FluentWizard>
+@code {
+    int Value = 0;
+
+    FluentWizard fluentWizard = default!;
+
+    private async Task WizardFinish()
+    {
+        var dialog = await DialogService.ShowMessageBoxAsync(new DialogParameters<MessageBoxContent>()
+            {
+                Content = new()
+                {
+                    Title = "ウィザード完了！"
+                }
+            });
+    }
+}

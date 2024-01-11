@@ -1,0 +1,34 @@
+﻿@page "/"
+@inject IDialogService DialogService
+
+<PageTitle>Home</PageTitle>
+
+<FluentWizard OnFinish="WizardFinish">
+    
+    <Steps>
+        <FluentWizardStep Label="Step1">
+            何かの処理その1
+        </FluentWizardStep>
+        <FluentWizardStep Label="Step2">
+            何かの処理その2
+        </FluentWizardStep>
+        <FluentWizardStep Label="Step3">
+            何かの処理その3
+        </FluentWizardStep>
+    </Steps>
+</FluentWizard>
+
+@code {
+
+    private async Task WizardFinish()
+    {
+        var dialog = await DialogService.ShowMessageBoxAsync(new DialogParameters<MessageBoxContent>()
+            {
+                Content = new()
+                {
+                    Title = "ウィザード完了！"
+                }
+            });
+    }
+
+}
