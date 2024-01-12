@@ -9,8 +9,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddFluentUIComponents();
-FluentWizard.LabelButtonDone = "Š®—¹";
-FluentWizard.LabelButtonNext = "Ÿ‚Ö";
-FluentWizard.LabelButtonPrevious = "‘O‚Ö";
+FluentWizard.LabelButtonDone = "å®Œäº†";
+FluentWizard.LabelButtonNext = "æ¬¡ã¸";
+FluentWizard.LabelButtonPrevious = "å‰ã¸";
 
 await builder.Build().RunAsync();
