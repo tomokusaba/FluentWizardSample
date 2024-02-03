@@ -44,7 +44,7 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_MUSHROOM_0FCB8C710 }}
           action: "close"
-name: Playwright Tests
+name: Playwright_Tests
 on:
   deployment_status:
 jobs:
