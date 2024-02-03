@@ -1,0 +1,259 @@
+﻿@page "/TwoItemSortableList"
+
+<FluentLabel Typo="Typography.PageTitle">TwoItemSortableList</FluentLabel>
+<style>
+    .fluent-sortable-list.darker {
+        --fluent-sortable-list-background-color: var(--neutral-layer-4) !important;
+    }
+</style>
+
+
+<FluentGrid Justify="JustifyContent.FlexStart" Spacing="3">
+    <FluentGridItem xs="12" sm="6">
+        <h5>都内</h5>
+        <FluentSortableList Id="shared1" Class="darker" Group="sharedLists" OnUpdate="@SortListOne" OnRemove="@ListOneRemove" Items="@items1" Context="item">
+            <ItemTemplate>@item.Name</ItemTemplate>
+        </FluentSortableList>
+    </FluentGridItem>
+    <FluentGridItem xs="12" sm="6">
+        <h5>千葉</h5>
+        <FluentSortableList Id="shared2" Group="sharedLists" OnUpdate="@SortListTwo" OnRemove="@ListTwoRemove" Items="@items2" Context="item">
+            <ItemTemplate>@item.Name</ItemTemplate>
+        </FluentSortableList>
+    </FluentGridItem>
+</FluentGrid>
+
+<FluentButton Appearance="Appearance.Accent" OnClick="OnFinish">Finish</FluentButton>
+
+@code {
+
+    private string? CompletionMessage { get; set; }
+
+    public class Item
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+
+        public bool Disabled { get; set; } = false;
+    }
+
+    public List<Item> items1 = new(){
+       new Item { Id = 1, Name = "日本橋" },
+       new Item { Id = 2, Name = "飯田橋" },
+       new Item { Id = 3, Name = "東陽町" },
+       new Item { Id = 4, Name = "浦安" },
+       new Item { Id = 5, Name = "西船橋" },
+       new Item { Id = 6, Name = "南砂町" },
+       new Item { Id = 7, Name = "大手町" },
+       new Item { Id = 8, Name = "中野" },
+       new Item { Id = 9, Name = "落合" },
+       new Item { Id = 10, Name = "神楽坂" },
+
+    }
+
+    public List<Item> items2 = new() {
+        new Item { Id = 1, Name = "早稲田" },
+        new Item { Id = 2, Name = "九段下" },
+        new Item { Id = 3, Name = "茅場町" },
+        new Item { Id = 4, Name = "行徳" },
+        new Item { Id = 5, Name = "原木中山" },
+        new Item { Id = 6, Name = "西葛西" },
+        new Item { Id = 7, Name = "門前仲町" },
+        new Item { Id = 8, Name = "葛西" },
+        new Item { Id = 9, Name = "竹橋" },
+        new Item { Id = 10, Name = "木場" },
+        new Item { Id = 11, Name = "妙典" },
+        new Item { Id = 12, Name = "高田馬場" },
+        new Item { Id = 13, Name = "南行徳" },
+    }
+
+    private void ListOneRemove(FluentSortableListEventArgs args)
+    {
+        if (args is null)
+        {
+            return;
+        }
+
+        // get the item at the old index in list 1
+        var item = items1[args.OldIndex];
+
+        // add it to the new index in list 2
+        items2.Insert(args.NewIndex, item);
+
+        // remove the item from the old index in list 1
+        items1.Remove(items1[args.OldIndex]);
+    }
+
+    private void ListTwoRemove(FluentSortableListEventArgs args)
+    {
+        if (args is null)
+        {
+            return;
+        }
+        // get the item at the old index in list 2
+        var item = items2[args.OldIndex];
+
+        // add it to the new index in list 1
+        items1.Insert(args.NewIndex, item);
+
+        // remove the item from the old index in list 2
+        items2.Remove(items2[args.OldIndex]);
+    }
+    private void SortListOne(FluentSortableListEventArgs args)
+    {
+        if (args is null || args.OldIndex == args.NewIndex)
+        {
+            return;
+        }
+
+        var oldIndex = args.OldIndex;
+        var newIndex = args.NewIndex;
+
+        var items = this.items1;
+        var itemToMove = items[oldIndex];
+        items.RemoveAt(oldIndex);
+
+        if (newIndex < items.Count)
+        {
+            items.Insert(newIndex, itemToMove);
+        }
+        else
+        {
+            items.Add(itemToMove);
+        }
+    }
+
+    private void SortListTwo(FluentSortableListEventArgs args)
+    {
+        if (args is null || args.OldIndex == args.NewIndex)
+        {
+            return;
+        }
+
+        var oldIndex = args.OldIndex;
+        var newIndex = args.NewIndex;
+
+        var items = this.items2;
+        var itemToMove = items[oldIndex];
+        items.RemoveAt(oldIndex);
+
+        if (newIndex < items.Count)
+        {
+            items.Insert(newIndex, itemToMove);
+        }
+        else
+        {
+            items.Add(itemToMove);
+        }
+    }
+
+    private void OnFinish()
+    {
+        if (Finish())
+        {
+            CompletionMessage = "完了";
+        }
+        else
+        {
+            CompletionMessage = "未完了";
+        }
+    }
+
+    private bool Finish()
+    {
+        bool IsFinished = true;
+        if (items1[0].Name != "中野")
+        {
+            IsFinished = false;
+        }
+        if (items1[1].Name != "落合")
+        {
+            IsFinished = false;
+        }
+        if (items1[2].Name != "高田馬場")
+        {
+            IsFinished = false;
+        }
+        if (items1[3].Name != "早稲田")
+        {
+            IsFinished = false;
+        }
+        if (items1[4].Name != "神楽坂")
+        {
+            IsFinished = false;
+        }
+        if (items1[5].Name != "飯田橋")
+        {
+            IsFinished = false;
+        }
+        if (items1[6].Name != "九段下")
+        {
+            IsFinished = false;
+        }
+        if (items1[7].Name != "竹橋")
+        {
+            IsFinished = false;
+        }
+        if (items1[8].Name != "大手町")
+        {
+            IsFinished = false;
+        }
+        if (items1[9].Name != "日本橋")
+        {
+            IsFinished = false;
+        }
+        if (items1[10].Name != "茅場町")
+        {
+            IsFinished = false;
+        }
+        if (items1[11].Name != "門前仲町")
+        {
+            IsFinished = false;
+        }
+        if (items1[12].Name != "木場")
+        {
+            IsFinished = false;
+        }
+        if (items1[13].Name != "東陽町")
+        {
+            IsFinished = false;
+        }
+        if (items1[14].Name != "南砂町")
+        {
+            IsFinished = false;
+        }
+        if (items1[15].Name != "西葛西")
+        {
+            IsFinished = false;
+        }
+        if (items1[16].Name != "葛西")
+        {
+            IsFinished = false;
+        }
+        if (items2[0].Name != "浦安")
+        {
+            IsFinished = false;
+        }
+        if (items2[1].Name != "南行徳")
+        {
+            IsFinished = false;
+        }
+        if (items2[2].Name != "行徳")
+        {
+            IsFinished = false;
+        }
+        if (items2[3].Name != "妙典")
+        {
+            IsFinished = false;
+        }
+        if (items2[4].Name != "原木中山")
+        {
+            IsFinished = false;
+        }
+        if (items2[5].Name != "西船橋")
+        {
+            IsFinished = false;
+        }
+        return IsFinished;
+    }
+}
