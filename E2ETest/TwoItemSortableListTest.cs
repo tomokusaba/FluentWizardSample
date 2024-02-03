@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace E2ETest;
 
+[Parallelizable(ParallelScope.Self)]
+[TestFixture]
 public class TwoItemSortableListTest : PageTest
 {
     public override BrowserNewContextOptions ContextOptions()
