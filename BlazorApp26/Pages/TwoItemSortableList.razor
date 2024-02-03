@@ -1,22 +1,25 @@
 ﻿@page "/TwoItemSortableList"
-
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="20">
 <FluentLabel Typo="Typography.PageTitle">TwoItemSortableList</FluentLabel>
 <style>
     .fluent-sortable-list.darker {
         --fluent-sortable-list-background-color: var(--neutral-layer-4) !important;
     }
 </style>
-
+<FluentLabel>
+    東京メトロ東西線の駅を中野から西船橋まで都内の駅と千葉県内に分けて順番に並び替えてください。
+</FluentLabel>
+<FluentLabel Typo="Typography.Subject" Color="Color.Info">@CompletionMessage</FluentLabel>
 
 <FluentGrid Justify="JustifyContent.FlexStart" Spacing="3">
     <FluentGridItem xs="12" sm="6">
-        <h5>都内</h5>
+        <FluentLabel Typo="Typography.PaneHeader">都内</FluentLabel>
         <FluentSortableList Id="shared1" Class="darker" Group="sharedLists" OnUpdate="@SortListOne" OnRemove="@ListOneRemove" Items="@items1" Context="item">
             <ItemTemplate>@item.Name</ItemTemplate>
         </FluentSortableList>
     </FluentGridItem>
     <FluentGridItem xs="12" sm="6">
-        <h5>千葉</h5>
+        <FluentLabel Typo="Typography.PaneHeader">千葉</FluentLabel>
         <FluentSortableList Id="shared2" Group="sharedLists" OnUpdate="@SortListTwo" OnRemove="@ListTwoRemove" Items="@items2" Context="item">
             <ItemTemplate>@item.Name</ItemTemplate>
         </FluentSortableList>
@@ -24,7 +27,7 @@
 </FluentGrid>
 
 <FluentButton Appearance="Appearance.Accent" OnClick="OnFinish">Finish</FluentButton>
-
+</FluentStack>
 @code {
 
     private string? CompletionMessage { get; set; }
