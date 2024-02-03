@@ -1,4 +1,4 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@*<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">BlazorApp26</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -37,6 +37,27 @@
 
     </nav>
 </div>
+*@
+
+
+<FluentNavMenuTree>
+    <FluentNavMenuLink Icon="@(new Icons.Regular.Size24.FormMultiple())"
+                       Text="Wizard(Default)"
+                       Href="/" />
+    <FluentNavMenuLink Icon="@(new Icons.Regular.Size24.FormMultiple())"
+                       Text="Wizard(ButtonTemplate)"
+                       Href="counter" />
+    <FluentNavMenuLink Icon="@(new Icons.Regular.Size24.FormMultiple())"
+                       Text="Wizard(ButtonTemplate)"
+                       Href="weather" />
+    <FluentNavMenuLink Icon="@(new Icons.Regular.Size24.ArrowSort())"
+                       Text="SortableList"
+                       Href="sortablelist" />
+    <FluentNavMenuLink Icon="@(new Icons.Regular.Size24.ArrowSort())"
+                       Text="TwoItemSortableList"
+                       Href="TwoItemSortableList" />
+</FluentNavMenuTree>
+
 
 @code {
     private bool collapseNavMenu = true;

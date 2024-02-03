@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
+@*<div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -18,3 +18,23 @@
     <FluentTooltipProvider />
     <FluentMessageBarProvider />
 </div>
+*@
+<FluentLayout Style="height: 100%">
+
+    <FluentHeader>header</FluentHeader>
+    <FluentStack Orientation="Orientation.Horizontal" Width="100%" Style="height:stretch">
+        <NavMenu />
+        <FluentBodyContent>
+            <ChildContent>
+                @Body
+            </ChildContent>
+        </FluentBodyContent>
+    </FluentStack>
+    <FluentFooter Style="bottom:auto;position:fixed;">
+        Fukuoka .NET Conf 2023
+    </FluentFooter>
+    <FluentToastProvider />
+    <FluentDialogProvider />
+    <FluentTooltipProvider />
+    <FluentMessageBarProvider />
+</FluentLayout>
