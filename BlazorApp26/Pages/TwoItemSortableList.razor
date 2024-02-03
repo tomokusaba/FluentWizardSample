@@ -162,6 +162,11 @@
     private bool Finish()
     {
         bool IsFinished = true;
+        if (items1.Count != 17 )
+        {
+            IsFinished = false;
+            return IsFinished;
+        }
         if (items1[0].Name != "中野")
         {
             IsFinished = false;
