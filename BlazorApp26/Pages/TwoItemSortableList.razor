@@ -1,12 +1,12 @@
 ﻿@page "/TwoItemSortableList"
 <FluentStack Orientation="Orientation.Vertical" VerticalGap="20">
-<FluentLabel Typo="Typography.PageTitle">TwoItemSortableList</FluentLabel>
+    <FluentLabel Typo="Typography.PageTitle" data-testid="twoitemsortablelisttitle">TwoItemSortableList</FluentLabel>
 <style>
     .fluent-sortable-list.darker {
         --fluent-sortable-list-background-color: var(--neutral-layer-4) !important;
     }
 </style>
-<FluentLabel>
+<FluentLabel data-testid="explanation">
     東京メトロ東西線の駅を中野から西船橋まで都内の駅と千葉県内に分けて順番に並び替えてください。
 </FluentLabel>
 <FluentLabel Typo="Typography.Subject" Color="Color.Info">@CompletionMessage</FluentLabel>

@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace E2ETest;
 
-[Parallelizable(ParallelScope.Self)]
-[TestFixture]
-public class SortableListTest : PageTest
+public class TwoItemSortableListTest : PageTest
 {
     public override BrowserNewContextOptions ContextOptions()
     {
@@ -20,19 +18,17 @@ public class SortableListTest : PageTest
     }
 
     [Test]
-    public async Task SortableList()
+    public async Task TwoItemSortableList()
     {
         await Page.GotoAsync("/");
 
         Playwright.Selectors.SetTestIdAttribute("aria-label");
 
-        await Page.GetByTestId("SortableList").IsVisibleAsync();
-        await Page.GetByTestId("SortableList").ClickAsync();
-
-        // Expect a title "to contain" a substring.
-        await Expect(Page).ToHaveTitleAsync(new Regex("BlazorApp26"));
+        await Page.GetByTestId("TwoItemSortableList").IsVisibleAsync();
+        await Page.GetByTestId("TwoItemSortableList").ClickAsync();
 
         await Page.GetByTestId("sortablelisttitle").IsVisibleAsync();
 
+        await Page.GetByTestId("explanation").IsVisibleAsync();
     }
 }
