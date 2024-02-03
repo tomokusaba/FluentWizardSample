@@ -1,8 +1,65 @@
 ﻿@page "/sotablelist"
 <FluentLabel Typo="Typography.PageTitle">SotableList</FluentLabel>
 
-
+<FluentGrid Justify="JustifyContent.FlexStart" Spacing="3">
+    <FluentGridItem xs="12" sm="6">
+        <FluentSortableList Items="items" OnUpdate="@SortList">
+            <ItemTemplate>@context.Name</ItemTemplate>
+        </FluentSortableList>
+    </FluentGridItem>
+</FluentGrid>
 
 @code {
 
+    public class Item
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+
+        public bool Disabled { get; set; } = false;
+    }
+
+    public List<Item> items = new()
+    {
+        new Item { Id = 1, Name = "オリオールズ" },
+        new Item { Id = 2, Name = "レッドソックス" },
+        new Item { Id = 3, Name = "ヤンキース" },
+        new Item { Id = 4, Name = "レイズ" },
+        new Item { Id = 5, Name = "ブルージェイス" },
+        new Item { Id = 6, Name = "ホワイトソックス" },
+        new Item { Id = 7, Name = "ガーディアンズ" },
+        new Item { Id = 8, Name = "タイガース" },
+        new Item { Id = 9, Name = "ロイヤルズ" },
+        new Item { Id = 10, Name = "ツインズ" },
+        new Item { Id = 11, Name = "アストロズ" },
+        new Item { Id = 12, Name = "エンゼルス" },
+        new Item { Id = 13, Name = "マリナーズ" },
+        new Item { Id = 14, Name = "レンジャーズ" },
+        new Item { Id = 15, Name = "アストロズ" },
+    };
+
+
+    private void SortList(FluentSortableListEventArgs args)
+    {
+        if (args is null || args.OldIndex == args.NewIndex)
+        {
+            return;
+        }
+
+        var oldIndex = args.OldIndex;
+        var newIndex = args.NewIndex;
+
+        var items = this.items;
+        var itemToMove = items[oldIndex];
+        items.RemoveAt(oldIndex);
+
+        if (newIndex < items.Count)
+        {
+            items.Insert(newIndex, itemToMove);
+        }
+        else
+        {
+            items.Add(itemToMove);
+        }
+    }
 }
