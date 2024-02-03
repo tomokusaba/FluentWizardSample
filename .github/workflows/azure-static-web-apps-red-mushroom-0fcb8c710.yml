@@ -46,6 +46,8 @@ jobs:
           action: "close"
 
   PlaywrightTest:
+    if: ${{ always() }}
+    needs: [build_and_deploy_job, close_pull_request_job]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     name: E2ETest
