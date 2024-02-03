@@ -44,22 +44,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_MUSHROOM_0FCB8C710 }}
           action: "close"
-name: Playwright_Tests
-on:
-  deployment_status:
-jobs:
-  test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    if: github.event.deployment_status.state == 'success'
-    steps:
-    - uses: actions/checkout@v4
-    - name: Setup dotnet
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 8.0.x
-    - run: dotnet build
-    - name: Ensure browsers are installed
-      run: pwsh E2ETest/bin/Debug/net8.0/playwright.ps1 install --with-deps
-    - name: Run tests
-      run: dotnet test
+
