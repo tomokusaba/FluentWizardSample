@@ -16,4 +16,9 @@ jobs:
     - name: Ensure browsers are installed
       run: pwsh E2ETest/bin/Debug/net8.0/playwright.ps1 install --with-deps
     - name: Run tests
-      run: dotnet test
+      run: dotnet test --no-restore
+    - name: Archive Videos
+      uses: actions/upload-artifact@v4
+      with:
+        name: Playwright videos
+        path: /videos/*
