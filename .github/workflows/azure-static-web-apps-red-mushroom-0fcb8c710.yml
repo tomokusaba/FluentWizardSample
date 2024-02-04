@@ -61,10 +61,12 @@ jobs:
     - run: dotnet build
     - name: Ensure browsers are installed
       run: pwsh E2ETest/bin/Debug/net8.0/playwright.ps1 install --with-deps
+    - name: Set UserSecrets
+      run: dotnet user-secrets Init
     - name: Set Endpoint
-      run: export PLAYWRIGHT_SERVICE_URL=${{ secrets.PLAYWRIGHT_SERVICE_URL }}
+      run: dotnet user-secrets set "PLAYWRIGHT_SERVICE_URL" "${{ secrets.PLAYWRIGHT_SERVICE_URL }}"
     - name: Set Access Token
-      run: export PLAYWRIGHT_SERVICE_ACCESS_TOKEN=${{ secrets.PLAYWRIGHT_SERVICE_ACCESS_TOKEN }}
+      run: dotnet user-secrets set "PLAYWRIGHT_SERVICE_ACCESS_TOKEN" "${{ secrets.PLAYWRIGHT_SERVICE_ACCESS_TOKEN }}"
     - name: Run tests
-      run:  dotnet test --PLAYWRIGHT_SERVICE_URL "${{ secrets.PLAYWRIGHT_SERVICE_URL }}" --PLAYWRIGHT_SERVICE_ACCESS_TOKEN "${{ secrets.PLAYWRIGHT_SERVICE_ACCESS_TOKEN }}"
+      run:  dotnet test 
 
