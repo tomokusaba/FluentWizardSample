@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Playwright;
 
 namespace E2ETest;
@@ -6,6 +7,8 @@ namespace E2ETest;
 [TestFixture]
 public class Tests : PageTest
 {
+
+
     public override BrowserNewContextOptions ContextOptions()
     {
         return new BrowserNewContextOptions()
