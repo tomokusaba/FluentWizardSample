@@ -14,7 +14,7 @@ public class Tests : PageTest
         return new BrowserNewContextOptions()
         {
             BaseURL = "https://red-mushroom-0fcb8c710.4.azurestaticapps.net/",
-            RecordVideoDir = "/videos",
+            RecordVideoDir = "videos",
         };
     }
 
