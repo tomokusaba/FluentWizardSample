@@ -50,11 +50,11 @@ jobs:
     needs: [build_and_deploy_job, close_pull_request_job]
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    name: E2ETest
       env:
       PLAYWRIGHT_SERVICE_ACCESS_TOKEN : ${{ secrets.PLAYWRIGHT_SERVICE_ACCESS_TOKEN }}
       PLAYWRIGHT_SERVICE_URL : ${{ secrets.PLAYWRIGHT_SERVICE_URL }}
 
+    name: E2ETest
     steps:
     - uses: actions/checkout@v4
     - name: Setup dotnet
