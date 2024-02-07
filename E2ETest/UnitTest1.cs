@@ -8,7 +8,6 @@ namespace E2ETest;
 public class Tests : PageTest
 {
 
-
     public override BrowserNewContextOptions ContextOptions()
     {
         return new BrowserNewContextOptions()
